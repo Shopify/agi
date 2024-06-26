@@ -1,0 +1,234 @@
+interactions:
+- request:
+    body: '{"messages": [{"role": "user", "content": "Your name is Kate and you are
+      an expert cataloger with 15 years experience.\nYou are friendly and concise
+      in your communications.\nYou are meticulous and detail-oriented.\n\nYour task
+      today is to extract concepts from blocks of text and assign relationships between
+      the concepts.\n\nThese are the relationship types to use: attribute, type_of,
+      part_of, leads_to, uses, connected_to, related_to, owns, has, can_be, began,
+      finished\n\nYou will respond with a json object in the following format.\n\n```json\n{\n    \"concepts\":
+      [\n        \"butterfly\",\n        \"red\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Butterfly\",\n            \"relationship\": \"can_be\",\n            \"target\":
+      \"Red\",\n            \"strength\": 0.8\n        }\n    ]\n}\n```\n\nHere is
+      an example input and expected output.\n\ninput: \"Monarch butterflies are orange
+      and black\"\noutput:\n```json\n{\n    \"concepts\": [\n        \"Monarch butterfly\",\n        \"Butterfly\",\n        \"Orange\",\n        \"Black\"\n    ],\n    \"relationships\":
+      [\n        {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"type_of\",\n            \"target\": \"Butterfly\",\n            \"strength\":
+      0.9\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Orange\",\n            \"strength\":
+      1.0\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Black\",\n            \"strength\":
+      1.0\n        }\n    ]\n}\n```\n\nSpecial cases.\n - When a year is referenced
+      the concept will be prepended with \"year: \"\n - When a date is referenced
+      the concept will be prepended with \"date: \" and stored in the format YYYY-MM-DD\n\ninput:
+      \"The Berlin Wall fell on the 9th of November, 1989.\"\noutput:\n```json\n{\n    \"concepts\":
+      [\n        \"date: 1989-11-09\",\n        \"year: 1989\",\n        \"Berlin
+      Wall\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"year: 1989\",\n            \"strength\": 1.0\n        }, {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"date: 1989-11-09\",\n            \"strength\": 1.0\n        }\n    ]\n}\n```\n\nExtract
+      the concepts and relationships from the follow block of text. \n\n```\nThe Seven
+      Lively Arts was a series of seven paintings created by the Spanish surrealist
+      painter Salvador Dal\u00ed in 1944 and, after they were lost in a fire in 1956,
+      recreated in an updated form by Dal\u00ed in 1957. The paintings depicted the
+      seven arts of dancing, opera, ballet, music, cinema, radio/television and theatre.\n```"}],
+      "model": "gpt-4o", "response_format": {"type": "json_object"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '2944'
+      content-type:
+      - application/json
+      host:
+      - openai-proxy.shopify.ai
+      user-agent:
+      - OpenAI/Python 1.35.4
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - 'false'
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.35.4
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.4
+    method: POST
+    uri: https://openai-proxy.shopify.ai/v1/chat/completions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA9RY247aMBB9z1dYfibbZANk4a3dVSv1ol6WqiuVCpkwJN4a27IHuhTxSf2K/ljl
+        TVjaJFy6YrvlJYrOzLGPJxN7xguPEMpHtEtokjFMJlr4Hfj4fn5ur3qvvsP1i0+ZejnLIArD8ZVI
+        v9GGY6jhNSS4Yp0kaqIFIFcyNycGGIIbNYzDTjOKw6h9a5ioEQhHSzX6TeWfBqdNP2j5YVQQM8UT
+        sLRLPnuEELK4fTqJcgQ3tEuCxgqZgLUsBdq9cyKEGiUcQpm13CKTSBtrY6IkgrxVvehLB/UdloBG
+        23dT5mBu6GVALmEGkrzmMxBz8tQ4r8bvPu8Yl8hlWoIvwXCwFXAGsowxMWMjZcgFEz9/lI2aSW4z
+        YqfGABPcItFuPjAlxzkw0yVhp9ksGUYMITf4QegH4QZeq72B12pv58WbeHEt7zk3UIIumEyq8Xur
+        wbAS9owJAVgC30wtT0rYOZcwKbM/sBFXT3ogYMYtV+Xv0MuAoROXg18aq+wwIJjLaptxXU6Rxfo1
+        d7ZqahJwXvtkT3WCnIlzDQM1rvFFZlIXgm59ihUi0IBMMXNu4UmwNi8bDy5dM4O7pdf+NIcSvzEu
+        VbUM0fDhFGFnqMs/7uNHuthfB8P5LvGbd5iDhXzXFPfO8f02wMf/GkNImdyxmA2b9KHEbx2+Jn+U
+        lJC4DEK1Q/jWQ+RQ8itHwybhGbN7Brp0qv1zpfcIce15+/jpbaDYbvaNfPygKV47/GHiH/+X8R+B
+        5gnuyvu6UupYtFcLvmNRXlOWHov0avF8LMprSvxjkb61ETmWRdy1S3+hveis+nJJvdVyVp28UKk2
+        aui6fjkV4g4fc1f/DQwwq6Tr2i0qndOXnmvT3I3B9I9LAKqNmmgcoPoK0g3Yjpr5eHR9R7G2np3F
+        hRUVMrE2hK3T0Cs0Uju3CJPBmMsUjDY8v0IY60ECQdyJoigYU2/p/QIAAP//AwC3CH4iSxEAAA==
+    headers:
+      CF-RAY:
+      - 89a0532e0bcda226-YYZ
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Jun 2024 21:35:03 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=zLk4S83NJ%2B6f69WNqYm4CmPv%2Be%2FEydRp5dXNzDfK5F0NXei7qstJwwFuspbsrbsaR0ed7Loj2KyiZQ8H%2BvlgfN%2BM52%2FwsCr7WglsIYoGADRWQVQizpNIj18W3ms%2F357qWMEL6%2B7DNXB8"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - cfRequestDuration;dur=30.999899
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 97c0c8b7b4459e3692474940a9e36da4
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages": [{"role": "user", "content": "Your name is Kate and you are
+      an expert cataloger with 15 years experience.\nYou are friendly and concise
+      in your communications.\nYou are meticulous and detail-oriented.\n\nYour task
+      today is to extract concepts from blocks of text and assign relationships between
+      the concepts.\n\nThese are the relationship types to use: attribute, type_of,
+      part_of, leads_to, uses, connected_to, related_to, owns, has, can_be, began,
+      finished\n\nYou will respond with a json object in the following format.\n\n```json\n{\n    \"concepts\":
+      [\n        \"butterfly\",\n        \"red\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Butterfly\",\n            \"relationship\": \"can_be\",\n            \"target\":
+      \"Red\",\n            \"strength\": 0.8\n        }\n    ]\n}\n```\n\nHere is
+      an example input and expected output.\n\ninput: \"Monarch butterflies are orange
+      and black\"\noutput:\n```json\n{\n    \"concepts\": [\n        \"Monarch butterfly\",\n        \"Butterfly\",\n        \"Orange\",\n        \"Black\"\n    ],\n    \"relationships\":
+      [\n        {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"type_of\",\n            \"target\": \"Butterfly\",\n            \"strength\":
+      0.9\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Orange\",\n            \"strength\":
+      1.0\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Black\",\n            \"strength\":
+      1.0\n        }\n    ]\n}\n```\n\nSpecial cases.\n - When a year is referenced
+      the concept will be prepended with \"year: \"\n - When a date is referenced
+      the concept will be prepended with \"date: \" and stored in the format YYYY-MM-DD\n\ninput:
+      \"The Berlin Wall fell on the 9th of November, 1989.\"\noutput:\n```json\n{\n    \"concepts\":
+      [\n        \"date: 1989-11-09\",\n        \"year: 1989\",\n        \"Berlin
+      Wall\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"year: 1989\",\n            \"strength\": 1.0\n        }, {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"date: 1989-11-09\",\n            \"strength\": 1.0\n        }\n    ]\n}\n```\n\nExtract
+      the concepts and relationships from the follow block of text. \n\n```\nThe Seven
+      Lively Arts was a series of seven paintings created by the Spanish surrealist
+      painter Salvador Dal\u00ed in 1944 and, after they were lost in a fire in 1956,
+      recreated in an updated form by Dal\u00ed in 1957. The paintings depicted the
+      seven arts of dancing, opera, ballet, music, cinema, radio/television and theatre.\n```"}],
+      "model": "gpt-4o", "response_format": {"type": "json_object"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '2944'
+      content-type:
+      - application/json
+      host:
+      - openai-proxy.shopify.ai
+      user-agent:
+      - OpenAI/Python 1.35.4
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - 'false'
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.35.4
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.4
+    method: POST
+    uri: https://openai-proxy.shopify.ai/v1/chat/completions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAA9RY247aMBB9z1dYfibbZANk4a3dVSv1ol6WqiuVCpkwJN4a27IHuhTxSf2K/ljl
+        TVjaJFy6YrvlJYrOzLGPJxN7xguPEMpHtEtokjFMJlr4Hfj4fn5ur3qvvsP1i0+ZejnLIArD8ZVI
+        v9GGY6jhNSS4Yp0kaqIFIFcyNycGGIIbNYzDTjOKw6h9a5ioEQhHSzX6TeWfBqdNP2j5YVQQM8UT
+        sLRLPnuEELK4fTqJcgQ3tEuCxgqZgLUsBdq9cyKEGiUcQpm13CKTSBtrY6IkgrxVvehLB/UdloBG
+        23dT5mBu6GVALmEGkrzmMxBz8tQ4r8bvPu8Yl8hlWoIvwXCwFXAGsowxMWMjZcgFEz9/lI2aSW4z
+        YqfGABPcItFuPjAlxzkw0yVhp9ksGUYMITf4QegH4QZeq72B12pv58WbeHEt7zk3UIIumEyq8Xur
+        wbAS9owJAVgC30wtT0rYOZcwKbM/sBFXT3ogYMYtV+Xv0MuAoROXg18aq+wwIJjLaptxXU6Rxfo1
+        d7ZqahJwXvtkT3WCnIlzDQM1rvFFZlIXgm59ihUi0IBMMXNu4UmwNi8bDy5dM4O7pdf+NIcSvzEu
+        VbUM0fDhFGFnqMs/7uNHuthfB8P5LvGbd5iDhXzXFPfO8f02wMf/GkNImdyxmA2b9KHEbx2+Jn+U
+        lJC4DEK1Q/jWQ+RQ8itHwybhGbN7Brp0qv1zpfcIce15+/jpbaDYbvaNfPygKV47/GHiH/+X8R+B
+        5gnuyvu6UupYtFcLvmNRXlOWHov0avF8LMprSvxjkb61ETmWRdy1S3+hveis+nJJvdVyVp28UKk2
+        aui6fjkV4g4fc1f/DQwwq6Tr2i0qndOXnmvT3I3B9I9LAKqNmmgcoPoK0g3Yjpr5eHR9R7G2np3F
+        hRUVMrE2hK3T0Cs0Uju3CJPBmMsUjDY8v0IY60ECQdyJoigYU2/p/QIAAP//AwC3CH4iSxEAAA==
+    headers:
+      CF-RAY:
+      - 89a05aa6c82eabb5-YYZ
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Jun 2024 21:40:09 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=UT6u0vhWDjONc5dlu1BqrmQnza0BAGyBIgBF8AQzasCEb8eTcDEFR8JcIzpZnw0DAFBEmSDP%2BJnsoHCI06ol5Uyzqg%2Fn469X5nyWCPHB5iwddGV8Q52GGnAdBnAazv5pjIoLOZdVbtjJ"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - cfRequestDuration;dur=125.999928
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 97c0c8b7b4459e3692474940a9e36da4
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1

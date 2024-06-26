@@ -1,0 +1,92 @@
+{% include 'templates/cataloger_agent.j2' %}
+
+Your task today is to extract concepts from blocks of text and assign relationships between the concepts.
+
+These are the relationship types to use: {{ relationship_types | join(', ') }}
+
+You will respond with a json object in the following format.
+
+```json
+{
+    "concepts": [
+        "butterfly",
+        "red"
+    ],
+    "relationships": [
+        {
+            "source": "Butterfly",
+            "relationship": "can_be",
+            "target": "Red",
+            "strength": 0.8
+        }
+    ]
+}
+```
+
+Here is an example input and expected output.
+
+input: "Monarch butterflies are orange and black"
+output:
+```json
+{
+    "concepts": [
+        "Monarch butterfly",
+        "Butterfly",
+        "Orange",
+        "Black"
+    ],
+    "relationships": [
+        {
+            "source": "Monarch butterfly",
+            "relationship": "type_of",
+            "target": "Butterfly",
+            "strength": 0.9
+        }, {
+            "source": "Monarch butterfly",
+            "relationship": "attribute",
+            "target": "Orange",
+            "strength": 1.0
+        }, {
+            "source": "Monarch butterfly",
+            "relationship": "attribute",
+            "target": "Black",
+            "strength": 1.0
+        }
+    ]
+}
+```
+
+Special cases.
+ - When a year is referenced the concept will be prepended with "year: "
+ - When a date is referenced the concept will be prepended with "date: " and stored in the format YYYY-MM-DD
+
+input: "The Berlin Wall fell on the 9th of November, 1989."
+output:
+```json
+{
+    "concepts": [
+        "date: 1989-11-09",
+        "year: 1989",
+        "Berlin Wall"
+    ],
+    "relationships": [
+        {
+            "source": "Berlin Wall",
+            "relationship": "finished",
+            "target": "year: 1989",
+            "strength": 1.0
+        }, {
+            "source": "Berlin Wall",
+            "relationship": "finished",
+            "target": "date: 1989-11-09",
+            "strength": 1.0
+        }
+    ]
+}
+```
+
+Extract the concepts and relationships from the follow block of text. 
+
+```
+{{ input }}
+```

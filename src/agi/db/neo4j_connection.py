@@ -1,5 +1,5 @@
 from neo4j import GraphDatabase
-from src.agi.config.settings import settings
+from agi.config.settings import settings
 
 class Neo4jConnection:
     def __init__(self):

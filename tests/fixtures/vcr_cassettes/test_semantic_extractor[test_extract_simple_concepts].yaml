@@ -1,0 +1,218 @@
+interactions:
+- request:
+    body: '{"messages": [{"role": "user", "content": "Your name is Kate and you are
+      an expert cataloger with 15 years experience.\nYou are friendly and concise
+      in your communications.\nYou are meticulous and detail-oriented.\n\nYour task
+      today is to extract concepts from blocks of text and assign relationships between
+      the concepts.\n\nThese are the relationship types to use: attribute, type_of,
+      part_of, leads_to, uses, connected_to, related_to, owns, has, can_be, began,
+      finished\n\nYou will respond with a json object in the following format.\n\n```json\n{\n    \"concepts\":
+      [\n        \"butterfly\",\n        \"red\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Butterfly\",\n            \"relationship\": \"can_be\",\n            \"target\":
+      \"Red\",\n            \"strength\": 0.8\n        }\n    ]\n}\n```\n\nHere is
+      an example input and expected output.\n\ninput: \"Monarch butterflies are orange
+      and black\"\noutput:\n```json\n{\n    \"concepts\": [\n        \"Monarch butterfly\",\n        \"Butterfly\",\n        \"Orange\",\n        \"Black\"\n    ],\n    \"relationships\":
+      [\n        {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"type_of\",\n            \"target\": \"Butterfly\",\n            \"strength\":
+      0.9\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Orange\",\n            \"strength\":
+      1.0\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Black\",\n            \"strength\":
+      1.0\n        }\n    ]\n}\n```\n\nSpecial cases.\n - When a year is referenced
+      the concept will be prepended with \"year: \"\n - When a date is referenced
+      the concept will be prepended with \"date: \" and stored in the format YYYY-MM-DD\n\ninput:
+      \"The Berlin Wall fell on the 9th of November, 1989.\"\noutput:\n```json\n{\n    \"concepts\":
+      [\n        \"date: 1989-11-09\",\n        \"year: 1989\",\n        \"Berlin
+      Wall\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"year: 1989\",\n            \"strength\": 1.0\n        }, {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"date: 1989-11-09\",\n            \"strength\": 1.0\n        }\n    ]\n}\n```\n\nExtract
+      the concepts and relationships from the follow block of text. \n\n```\nFrance
+      is a county in Europe\n```"}], "model": "gpt-4o", "response_format": {"type":
+      "json_object"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '2644'
+      content-type:
+      - application/json
+      host:
+      - openai-proxy.shopify.ai
+      user-agent:
+      - OpenAI/Python 1.35.4
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - 'false'
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.35.4
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.4
+    method: POST
+    uri: https://openai-proxy.shopify.ai/v1/chat/completions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwAAAP//rFNNj5swFLzzKyyfIYIFkoZb1Xal3lqpUT+WCjnkBdwaP9d+UTeK8t8r
+        x7Bsd6PtpReEZua9GT2GU8QYlzteMd72gtrBqGQNm4/3v2RZvHcf8tfHbblRn35/3nx7+2X59ZbH
+        fgK3P6ClaWrR4mAUkEQd6NaCIPBbs1W2LvJVlpcXYsAdKD/WGUoKTG7SmyJJyyTLx8EeZQuOV+wu
+        Yoyx0+XpI+od3POKpfGEDOCc6IBXDyLGuEXlES6ck46EJh7PZIuaQF9S1/pUaw/WHm3BkKu9aQAD
+        cWuFbqHm8WPwDR402eMT9N3BooGaB+x7PO22oIS/iuuleWpwml+D2OHBer/quvfzjUFKRwMN7q9o
+        SdgOKKiu5R5tyYLuqPe6dLGe6XP8/8MaYenfYadzvpg1W6SPso6Xr/WZR1P8qSkKO2Nx61ulD0o9
+        4HuppesbC8Kh9q1whCaMnyP/GX0jD3+VjBuLg6GG8Cdov7BclmEfn/+Bmc3Ssa+ckISaieWyjMaI
+        3B0dwdDspe7AGitDQ/emKdL0FeTbVbbm0Tn6AwAA//8DANyiCXCqAwAA
+    headers:
+      CF-RAY:
+      - 89a04b034b50ab54-YYZ
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Jun 2024 21:29:29 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=qIMH9FerCQoew6PTi9qKB7zCWni%2F2aHPn0YPKKb8IhSPeEOjjkmE0Q7XVzCHepPMsoEpwcMk3scWY9pmumUSCR1EDVTuCWImUyi1y%2BYlqz9Iavbx5tAfLRrbMMqExfWY4VAm2QrY0K0e"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - cfRequestDuration;dur=170.000076
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 7cda32ad1a2d2afa2d0538a2ec2b0083
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+- request:
+    body: '{"messages": [{"role": "user", "content": "Your name is Kate and you are
+      an expert cataloger with 15 years experience.\nYou are friendly and concise
+      in your communications.\nYou are meticulous and detail-oriented.\n\nYour task
+      today is to extract concepts from blocks of text and assign relationships between
+      the concepts.\n\nThese are the relationship types to use: attribute, type_of,
+      part_of, leads_to, uses, connected_to, related_to, owns, has, can_be, began,
+      finished\n\nYou will respond with a json object in the following format.\n\n```json\n{\n    \"concepts\":
+      [\n        \"butterfly\",\n        \"red\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Butterfly\",\n            \"relationship\": \"can_be\",\n            \"target\":
+      \"Red\",\n            \"strength\": 0.8\n        }\n    ]\n}\n```\n\nHere is
+      an example input and expected output.\n\ninput: \"Monarch butterflies are orange
+      and black\"\noutput:\n```json\n{\n    \"concepts\": [\n        \"Monarch butterfly\",\n        \"Butterfly\",\n        \"Orange\",\n        \"Black\"\n    ],\n    \"relationships\":
+      [\n        {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"type_of\",\n            \"target\": \"Butterfly\",\n            \"strength\":
+      0.9\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Orange\",\n            \"strength\":
+      1.0\n        }, {\n            \"source\": \"Monarch butterfly\",\n            \"relationship\":
+      \"attribute\",\n            \"target\": \"Black\",\n            \"strength\":
+      1.0\n        }\n    ]\n}\n```\n\nSpecial cases.\n - When a year is referenced
+      the concept will be prepended with \"year: \"\n - When a date is referenced
+      the concept will be prepended with \"date: \" and stored in the format YYYY-MM-DD\n\ninput:
+      \"The Berlin Wall fell on the 9th of November, 1989.\"\noutput:\n```json\n{\n    \"concepts\":
+      [\n        \"date: 1989-11-09\",\n        \"year: 1989\",\n        \"Berlin
+      Wall\"\n    ],\n    \"relationships\": [\n        {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"year: 1989\",\n            \"strength\": 1.0\n        }, {\n            \"source\":
+      \"Berlin Wall\",\n            \"relationship\": \"finished\",\n            \"target\":
+      \"date: 1989-11-09\",\n            \"strength\": 1.0\n        }\n    ]\n}\n```\n\nExtract
+      the concepts and relationships from the follow block of text. \n\n```\nFrance
+      is a county in Europe\n```"}], "model": "gpt-4o", "response_format": {"type":
+      "json_object"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '2644'
+      content-type:
+      - application/json
+      host:
+      - openai-proxy.shopify.ai
+      user-agent:
+      - OpenAI/Python 1.35.4
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - 'false'
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.35.4
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.4
+    method: POST
+    uri: https://openai-proxy.shopify.ai/v1/chat/completions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwAAAP//rFNNj5swFLzzKyyfIYIFkoZb1Xal3lqpUT+WCjnkBdwaP9d+UTeK8t8r
+        x7Bsd6PtpReEZua9GT2GU8QYlzteMd72gtrBqGQNm4/3v2RZvHcf8tfHbblRn35/3nx7+2X59ZbH
+        fgK3P6ClaWrR4mAUkEQd6NaCIPBbs1W2LvJVlpcXYsAdKD/WGUoKTG7SmyJJyyTLx8EeZQuOV+wu
+        Yoyx0+XpI+od3POKpfGEDOCc6IBXDyLGuEXlES6ck46EJh7PZIuaQF9S1/pUaw/WHm3BkKu9aQAD
+        cWuFbqHm8WPwDR402eMT9N3BooGaB+x7PO22oIS/iuuleWpwml+D2OHBer/quvfzjUFKRwMN7q9o
+        SdgOKKiu5R5tyYLuqPe6dLGe6XP8/8MaYenfYadzvpg1W6SPso6Xr/WZR1P8qSkKO2Nx61ulD0o9
+        4HuppesbC8Kh9q1whCaMnyP/GX0jD3+VjBuLg6GG8Cdov7BclmEfn/+Bmc3Ssa+ckISaieWyjMaI
+        3B0dwdDspe7AGitDQ/emKdL0FeTbVbbm0Tn6AwAA//8DANyiCXCqAwAA
+    headers:
+      CF-RAY:
+      - 89a05aa57de4aa9c-YYZ
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Jun 2024 21:40:09 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=TlCpoXqBrpYSRjr7hCL02%2BqncT8Hd9pzfRW3srhJxe8AlmCLnMYdqiPi%2BgEExfhwdkNC6MeAOYMYz2ERtL4LaavpPXN6r9MWqZjLmCOJdL9MyEwrkDunH7K7M2UZy12rT5HvSug1GRN%2F"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - cfRequestDuration;dur=146.999836
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 7cda32ad1a2d2afa2d0538a2ec2b0083
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1
