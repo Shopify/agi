@@ -1,8 +1,5 @@
 import os
-from dotenv import load_dotenv
 import yaml
-
-load_dotenv()
 
 class Settings:
     def __init__(self):
@@ -12,6 +9,7 @@ class Settings:
         self.NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
         self.NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
         self.RELATIONSHIP_TYPES = self. _get_relationship_types()
+        self.TRUST_LEVEL = float(os.getenv("TRUST_LEVEL", 0.5))
 
     def _get_relationship_types(self):
         base_dir = os.path.dirname(__file__)
