@@ -4,8 +4,6 @@ import json
 from agi.config.settings import settings
 from openai import OpenAI
 
-RELATIONSHIP_TYPES = ["attribute", "type_of", "part_of", "leads_to", "uses", "connected_to", "related_to", "owns", "has", "can_be", "began", "finished"]
-
 def semantic_extractor(input):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     env = Environment(loader=FileSystemLoader(script_dir))
@@ -13,7 +11,7 @@ def semantic_extractor(input):
     template = env.get_template("templates/semantic_extractor.j2")
     prompt = template.render(
         input=input,
-        relationship_types=RELATIONSHIP_TYPES
+        relationship_types=settings.RELATIONSHIP_TYPES
     )
 
     client = OpenAI(
