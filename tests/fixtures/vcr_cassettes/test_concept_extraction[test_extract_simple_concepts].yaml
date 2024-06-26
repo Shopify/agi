@@ -1,0 +1,97 @@
+interactions:
+- request:
+    body: '{"messages": [{"role": "user", "content": "Your name is Kate and you are
+      an expert cataloger with 15 years experience. You are friendly and consice in
+      your communications. You are meticulous and detail-oriented.\n\nYour task today
+      is to extract concepts from blocks of text\n\nYou will respond with a json object
+      in the following format.\n\n```json\n{\n    \"concepts\": [\n        \"butterfly\",\n        \"red\"\n    ]\n}\n```\n\nHere
+      are some example inputs and expected outputs.\n\ninput: \"Monarch butterflies
+      are orange and migrate from Mexico to Canada though the United States\"\noutput:\n```json\n{\n    \"concepts\":
+      [\n        \"Monarch butterfly\",\n        \"Butterfly\",\n        \"Migration\",\n        \"Mexico\",\n        \"Canada\",\n        \"United
+      States\"\n    ]\n}\n```\n\ninput: \"Brackish water is water occurring in a natural
+      environment that has more salinity than freshwater, but not as much as seawater.\"\noutput:\n```json\n{\n    \"concepts\":
+      [\n        \"Brackish water\",\n        \"Water\",\n        \"Natural environment\",\n        \"Freshwater\",\n        \"Seawater\",\n        \"Salinity\"\n    ]\n}\n```\n\nSpecial
+      cases.\n - When a year is referenced the concept will be prepended with \"year:
+      \"\n - When a date is referenced the concept will be prepended with \"date:
+      \" and stored in the format YYYY-MM-DD\n\ninput: \"The Berlin Wall fell on the
+      9th of November, 1989.\"\noutput:\n```json\n{\n    \"concepts\": [\n        \"date:
+      1989-11-09\",\n        \"year: 1989\",\n        \"Berlin\",\n        \"Berlin
+      Wall\"\n    ]\n}\n```\n\nExtract the concepts from the follow block of text.
+      \n\n```\nFrance is a county in Europe\n```"}], "model": "gpt-4o", "response_format":
+      {"type": "json_object"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '1739'
+      content-type:
+      - application/json
+      host:
+      - openai-proxy.shopify.ai
+      user-agent:
+      - OpenAI/Python 1.35.4
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - 'false'
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.35.4
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.4
+    method: POST
+    uri: https://openai-proxy.shopify.ai/v1/chat/completions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwAAAP//XJFPT8MwDMXv/RSRzy3q1m7VdoWhaQguEwdEp6qkbheWxiHJENPU747S
+        7h9ccvg9P/vZOQaMgahgzoBvS8dbLaMZriv19vTQTlbT5fPyddV8L9Zf04WsD7sXCL2DPj6Ru7Pr
+        jlOrJTpBapC5wdKh7zrKRrM0icdp0gstVSi9rdEuSikax+M0iifRKDkZtyQ4Wpiz94Axxo796yOq
+        Cn9gzuLwTFq0tmwQ5pcixsCQ9ARKa4V1pXIQXkVOyqHqU+fqmCsPc085amdzP3SAg/BoSsUxh/AW
+        3tNeOXP4Rxd7QxpzGNgmVx2cxnaXvJIabejD76b2Ul54LZSw28JgaUn5bNaRHuxdwNimv8v+z6qg
+        DbXaFY52qHzDJEuHfnD9ias6Tk6iI1fKG9csC04JwR6sw7aohWrQaCOGM9W6qCbZNImzehZD0AW/
+        AAAA//8DAMGFx5wvAgAA
+    headers:
+      CF-RAY:
+      - 899fa4b2effcab76-YYZ
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Jun 2024 19:35:56 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=2md49Zs12zxw2pxbjOzz%2BkNLSvTh2%2FsAmDNFZ4nJWli2SChKSi%2F%2B3QZJeBsbzwqevf66jbpX6wHkTPK23GxcrlVTYu8cpjCn1iaTqGiaxCye4TFm28MGL5c4Rd1WnmRtyxqsA2ODALRD"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - cfRequestDuration;dur=129.999876
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      X-Request-Id:
+      - 2bdeb719faf5ee970b339bc6e0ab7947
+      alt-svc:
+      - h3=":443"; ma=86400
+    status:
+      code: 200
+      message: OK
+version: 1

@@ -1,0 +1,5 @@
+ - has
+ - belongs_to
+ - owns
+ - contains
+ 
