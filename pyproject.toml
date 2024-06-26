@@ -2,7 +2,7 @@
 name = "agi"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
+authors = ["gregology", "ryoung2512", "xiangshiyin"]
 readme = "README.md"
 packages = [{include = "agi", from = "src"}]
 
