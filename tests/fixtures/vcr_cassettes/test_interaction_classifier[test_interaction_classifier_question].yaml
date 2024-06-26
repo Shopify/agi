@@ -1,0 +1,125 @@
+interactions:
+- request:
+    body: '{"messages": [{"role": "user", "content": "Your name is Kate and you are
+      an expert cataloger with 15 years experience.\nYou are friendly and concise
+      in your communications.\nYou are meticulous and detail-oriented.\n\nYour task
+      today is to classify an interaction.\n\nInteractions can be either interrogative
+      or factual.\n\nClassify an interaction as \"interrogative\" when the interaction
+      is to request information.\nClassify an interaction as \"factual\" when the
+      purpose of the interaction is to inform.\n\nIgnore small talk etc when classifying
+      interactions.\n\nInclude a confidence score for your classification. The score
+      will be from 0 to 1.0 at increments of 0.1 where 0 is no confidence in your
+      classification and 1.0 is absolute confidence in your classification.\n\nYou
+      will respond with a json object in the following format.\n\n```json\n{\n    \"interaction_type\":
+      \"interrogative\",\n    \"confidence\": 0.9\n}\n```\n\nHere are some example
+      inputs and expected outputs.\n\ninput: \"What colour is the sky\"\noutput:\n```json\n{\n    \"interaction_type\":
+      \"interrogative\",\n    \"confidence\": 0.9\n}\n```\n\ninput: \"How are you
+      today? TIL that London is in England\"\noutput:\n```json\n{\n    \"interaction_type\":
+      \"factual\",\n    \"confidence\": 0.9\n}\n```\n\ninput: \"The Earth is estimated
+      to be about 4.54 billion years old!\"\noutput:\n```json\n{\n    \"interaction_type\":
+      \"factual\",\n    \"confidence\": 1.0\n}\n```\n\ninput: \"The sky is blue. Why
+      is the sky blue?\"\noutput:\n```json\n{\n    \"interaction_type\": \"interrogative\",\n    \"confidence\":
+      0.8\n}\n```\n\nClassify the interaction from the follow block of text. \n\n```\nWhere
+      is France located?\n```"}], "model": "gpt-4o", "response_format": {"type": "json_object"}}'
+    headers:
+      accept:
+      - application/json
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      content-length:
+      - '1761'
+      content-type:
+      - application/json
+      host:
+      - openai-proxy.shopify.ai
+      user-agent:
+      - OpenAI/Python 1.35.4
+      x-stainless-arch:
+      - arm64
+      x-stainless-async:
+      - 'false'
+      x-stainless-lang:
+      - python
+      x-stainless-os:
+      - MacOS
+      x-stainless-package-version:
+      - 1.35.4
+      x-stainless-runtime:
+      - CPython
+      x-stainless-runtime-version:
+      - 3.12.4
+    method: POST
+    uri: https://openai-proxy.shopify.ai/v1/chat/completions
+  response:
+    body:
+      string: !!binary |
+        H4sIAAAAAAAAAwAAAP//VFDLTsMwELznK6w9N1WSptDmjJAqEAdAAomgyHU3qcHxWvaCKFX/HTl9
+        RFx8mJdnZ58IAXoDlQC1lax6Z9Ilvqz5ufD3j/r3qbhrb1c35v61XLUPD+oJJtFB6w9UfHZNFfXO
+        IGuyR1p5lIwxNb/Ol2U5n2f5QPS0QRNtneO0pLTIijLN5mk+Oxm3pBUGqMRbIoQQ++GNFe0Gf6AS
+        2eSM9BiC7BCqi0gI8GQiAjIEHVhahslIKrKMdmhd231tI1iDtoxeqli+4Z3DGqoz6qmTrL+xhslZ
+        rci2eoNWDbp8mtX2AKcvDpduhjrnaR3vsF/GXPBWWx22jUcZyMYegckd7YdEiPdhg69/Z4Hz1Dtu
+        mD7RxsDZ4uqYB+PqI1sUJ5KJpRnxMlskp4YQdoGxb1ptO/TO6+MkrWvKLFvgbH2dLyE5JH8AAAD/
+        /wMAOdBKIBsCAAA=
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 89a1118e4d0dab7c-YYZ
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 26 Jun 2024 23:45:01 GMT
+      NEL:
+      - '{"success_fraction":0.01,"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=6%2FHTciqErW%2B3EATvwZAzkt3iwkiNUtqMEY6jW2g%2FlLvMNPynB0kSVQppyg0ZHHOPy0AO10TJWqaDD1ZiL%2B4uQh1RI8UFPdLdgRSWqD5qe4t53SInw6nZyKpHxUvk41BUwf491Anr3i24"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Server-Timing:
+      - cfRequestDuration;dur=753.999949
+      Set-Cookie:
+      - __cf_bm=EjMTymh185TH6OOvuNZww2wCaEQhcg_r2uRIaDbrP74-1719445501-1.0.1.1-j0Zl_fHZrD8WL275GdVHAStGl1feTq4f2GS.7M4.mXQJIq3Wk748cu9txuCGWqFXuMX3.QP2cfSkg2TMD8mALg;
+        path=/; expires=Thu, 27-Jun-24 00:15:01 GMT; domain=.api.openai.com; HttpOnly;
+        Secure
+      - _cfuvid=e9_eW.SbAkESlJt5Gi7wxgyDanFM8skEdxLA_d4KJVw-1719445501920-0.0.1.1-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      X-Content-Type-Options:
+      - nosniff
+      alt-svc:
+      - h3=":443"; ma=86400
+      openai-organization:
+      - shopify-hack-days
+      openai-processing-ms:
+      - '333'
+      openai-version:
+      - '2020-10-01'
+      x-ratelimit-limit-requests:
+      - '10000'
+      x-ratelimit-limit-tokens:
+      - '16000000'
+      x-ratelimit-remaining-requests:
+      - '9999'
+      x-ratelimit-remaining-tokens:
+      - '15999597'
+      x-ratelimit-reset-requests:
+      - 6ms
+      x-ratelimit-reset-tokens:
+      - 1ms
+      x-request-id:
+      - req_d6bbb22a3fe39d7a55c45b4254ae4736
+    status:
+      code: 200
+      message: OK
+version: 1
