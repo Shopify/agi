@@ -1,0 +1,65 @@
+{% include 'templates/cataloger_agent.j2' %}
+
+Your task today is to classify an interaction.
+
+Interactions can be either interrogative or factual.
+
+Classify an interaction as "interrogative" when the interaction is to request information.
+Classify an interaction as "factual" when the purpose of the interaction is to inform.
+
+Ignore small talk etc when classifying interactions.
+
+Include a confidence score for your classification. The score will be from 0 to 1.0 at increments of 0.1 where 0 is no confidence in your classification and 1.0 is absolute confidence in your classification.
+
+You will respond with a json object in the following format.
+
+```json
+{
+    "interaction_type": "interrogative",
+    "confidence": 0.9
+}
+```
+
+Here are some example inputs and expected outputs.
+
+input: "What colour is the sky"
+output:
+```json
+{
+    "interaction_type": "interrogative",
+    "confidence": 0.9
+}
+```
+
+input: "How are you today? TIL that London is in England"
+output:
+```json
+{
+    "interaction_type": "factual",
+    "confidence": 0.9
+}
+```
+
+input: "The Earth is estimated to be about 4.54 billion years old!"
+output:
+```json
+{
+    "interaction_type": "factual",
+    "confidence": 1.0
+}
+```
+
+input: "The sky is blue. Why is the sky blue?"
+output:
+```json
+{
+    "interaction_type": "interrogative",
+    "confidence": 0.8
+}
+```
+
+Classify the interaction from the follow block of text. 
+
+```
+{{ input }}
+```

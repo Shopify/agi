@@ -415,13 +415,13 @@ pyarrow = ["pyarrow (>=1.0.0)"]
 
 [[package]]
 name = "openai"
-version = "1.35.4"
+version = "1.35.5"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.7.1"
 files = [
-    {file = "openai-1.35.4-py3-none-any.whl", hash = "sha256:894b79c485fae2df3a6b68ceb570730e5a480c08bccc32a412cf3be2d4eb1384"},
-    {file = "openai-1.35.4.tar.gz", hash = "sha256:b58a0d6257c5c86e85b9b2f43e6eed04ada616560df9da0dca6697d06845e7c8"},
+    {file = "openai-1.35.5-py3-none-any.whl", hash = "sha256:28d92503c6e4b6a32a89277b36693023ef41f60922a4b5c8c621e8c5697ae3a6"},
+    {file = "openai-1.35.5.tar.gz", hash = "sha256:67ef289ae22d350cbf9381d83ae82c4e3596d71b7ad1cc886143554ee12fe0c9"},
 ]
 
 [package.dependencies]
@@ -478,13 +478,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "podman-compose"
-version = "1.1.0"
+version = "1.2.0"
 description = "A script to run docker-compose.yml using podman"
 optional = false
 python-versions = "*"
 files = [
-    {file = "podman_compose-1.1.0-py2.py3-none-any.whl", hash = "sha256:6b340fd42af418f624e0e487af9033b5fb272644f1e0812700c680b833670bdc"},
-    {file = "podman_compose-1.1.0.tar.gz", hash = "sha256:3cf28b83082119a19cae35b59c29422fd04480c4970f5940094a9116ed8b0a9d"},
+    {file = "podman_compose-1.2.0-py2.py3-none-any.whl", hash = "sha256:a78d0e5c83476ff36d4e5019a6e0e984133b4a416344904526ee05332734e32e"},
+    {file = "podman_compose-1.2.0.tar.gz", hash = "sha256:e47665546598a48d83d30ca2709a679412824bbe84b93f61779bc863e1a6f060"},
 ]
 
 [package.dependencies]
@@ -1031,4 +1031,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "a3d8d8ceedce65858ce838bb1e480b6f9148491eba6d1c2f9e122b302712b228"
+content-hash = "abb5546d002d0ff0061fe0444fb594850b544bfd368048cf59f745110e4325bd"
