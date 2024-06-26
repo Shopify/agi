@@ -1,21 +1,24 @@
 from jinja2 import Environment, FileSystemLoader
 import os
 import json
-from dotenv import load_dotenv
+from agi.config.settings import settings
 from openai import OpenAI
 
-load_dotenv()
+RELATIONSHIP_TYPES = ["attribute", "type_of", "part_of", "leads_to", "uses", "connected_to", "related_to", "owns", "has", "can_be", "began", "finished"]
 
-def extract_concepts(input):
+def semantic_extractor(input):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     env = Environment(loader=FileSystemLoader(script_dir))
 
-    dbt_config_template = env.get_template("templates/extract_concepts.j2")
-    prompt = dbt_config_template.render(input=input)
+    template = env.get_template("templates/semantic_extractor.j2")
+    prompt = template.render(
+        input=input,
+        relationship_types=RELATIONSHIP_TYPES
+    )
 
     client = OpenAI(
-        base_url=os.getenv("OPENAI_API_BASE"),
-        api_key=os.getenv("OPENAI_API_KEY")
+        base_url=settings.OPENAI_API_BASE,
+        api_key=settings.OPENAI_API_KEY
     )
 
     chat_completion = client.chat.completions.create(
