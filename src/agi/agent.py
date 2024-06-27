@@ -1,10 +1,20 @@
 from agi.extractors import interaction_classifier, semantic_extractor
 from agi.config.settings import settings
+from agi.concept import Concept
 
 
 class Agent:
-    def __init__(self, trust=settings.TRUST):
+    def __init__(
+            self,
+            trust=settings.TRUST,
+            gullibilty=settings.GULLIBLITY,
+            creativity=settings.GULLIBLITY,
+            susceptibility=settings.GULLIBLITY,
+        ):
         self.trust = trust
+        self.gullibilty = gullibilty
+        self.creativity = creativity
+        self.susceptibility = susceptibility
 
     def interact(self, message):
         message_classification = interaction_classifier(message)
@@ -13,9 +23,10 @@ class Agent:
 
         if message_classification["interaction_type"] == "factual":
             print(
-                f"Agent is {message_classification['confidence']} confident ",
+                f"Agent is {message_classification['confidence']} confident",
                 "that this is a factual message"
             )
+
             # look up identified concepts
             # for each concept check if it aligns with existing concept relationships
             # if trust is 1.0, update concept relationships to match new fact
@@ -25,7 +36,7 @@ class Agent:
             # determine if the interaction warrents a response
         elif message_classification["interaction_type"] == "interrogative":
             print(
-                f"Agent is {message_classification['confidence']} ",
+                f"Agent is {message_classification['confidence']}",
                 "confident that this is an interrogative message"
             )
             pass
