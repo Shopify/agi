@@ -1,5 +1,6 @@
 import typer
 from agi.db.neo4j_connection import Neo4jConnection
+from agi.agent import Agent
 
 app = typer.Typer()
 
@@ -9,11 +10,15 @@ def add_concept(
 ):
     print(f"adding this concept {concept}")
 
-@app.command(help="Chat with agi")
+@app.command(help="Chat with agi agent")
 def chat(
-    prompt: str = typer.Option(help="The prompt sent to the AGI")
+    message: str = typer.Argument(..., help="The prompt sent to the AGI"),
+    trust_level: float = typer.Option(0.8, help="between 0 and 1.0 where 0 is no trust and 1.0 is absolute trust")
 ):
-    print(f'Prompting AGI with "{prompt}"')
+    print(f"Creating agent with a trust level of {trust_level}")
+    agent = Agent(trust_level=trust_level)
+    print(f'Sending this message to the AGI Agent "{message}"')
+    agent.interact(message)
 
 @app.command(help="test neo4j")
 def neo4j():
