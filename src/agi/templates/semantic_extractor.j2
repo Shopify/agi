@@ -2,6 +2,22 @@
 
 Your task today is to extract concepts from blocks of text and assign relationships between the concepts.
 
+A concept includes a name and a type.
+
+The type is a broad category for the concept. Here are some example categories;
+ - year
+ - date
+ - animal
+ - color
+ - species
+ - place
+ - action
+
+The name is the base word of the concept. For instance;
+ - butterflies should be butterfly
+ - children should be child
+ - teacher, teaching, teaches, taught should be teach
+
 These are the relationship types to use: {{ relationship_types | join(', ') }}
 
 You will respond with a json object in the following format.
@@ -9,14 +25,25 @@ You will respond with a json object in the following format.
 ```json
 {
     "concepts": [
-        "butterfly",
-        "red"
+        {
+            "name": "butterfly",
+            "type": "animal"
+        }, {
+            "name": "red",
+            "type": "color"
+        }
     ],
     "relationships": [
         {
-            "source": "Butterfly",
+            "source": {
+                "name": "butterfly",
+                "type": "animal"
+            },
             "relationship": "can_be",
-            "target": "Red",
+            "target": {
+                "name": "red",
+                "type": "color"
+            },
             "confidence": 0.83
         }
     ]
@@ -33,26 +60,58 @@ output:
 ```json
 {
     "concepts": [
-        "Monarch butterfly",
-        "Butterfly",
-        "Orange",
-        "Black"
+        {
+            "name": "Monarch butterfly",
+            "type": "species"
+        },
+        {
+            "name": "Butterfly",
+            "type": "animal"
+        },
+        {
+            "name": "Orange",
+            "type": "color"
+        },
+        {
+            "name": "Black",
+            "type": "color"
+        }
     ],
     "relationships": [
         {
-            "source": "Monarch butterfly",
+            "source": {
+                "name": "Monarch butterfly",
+                "type": "species"
+            },
             "relationship": "type_of",
-            "target": "Butterfly",
+            "target": {
+                "name": "Butterfly",
+                "type": "animal"
+            },
             "confidence": 0.96
-        }, {
-            "source": "Monarch butterfly",
+        },
+        {
+            "source": {
+                "name": "Monarch butterfly",
+                "type": "species"
+            },
             "relationship": "attribute",
-            "target": "Orange",
+            "target": {
+                "name": "Orange",
+                "type": "color"
+            },
             "confidence": 0.99
-        }, {
-            "source": "Monarch butterfly",
+        },
+        {
+            "source": {
+                "name": "Monarch butterfly",
+                "type": "species"
+            },
             "relationship": "attribute",
-            "target": "Black",
+            "target": {
+                "name": "Black",
+                "type": "color"
+            },
             "confidence": 1.00
         }
     ]
@@ -60,28 +119,51 @@ output:
 ```
 
 Special cases.
- - When a year is referenced the concept will be prepended with "year: "
- - When a date is referenced the concept will be prepended with "date: " and stored in the format YYYY-MM-DD
+ - Dates
+   - When a date is included, create a concept for the year and the date
+
 
 input: "The Berlin Wall fell on the 9th of November, 1989."
 output:
 ```json
 {
     "concepts": [
-        "date: 1989-11-09",
-        "year: 1989",
-        "Berlin Wall"
+        {
+            "name": "1989-11-09",
+            "type": "date"
+        },
+        {
+            "name": "1989",
+            "type": "year"
+        },
+        {
+            "name": "Berlin Wall",
+            "type": "structure"
+        }
     ],
     "relationships": [
         {
-            "source": "Berlin Wall",
+            "source": {
+                "name": "Berlin Wall",
+                "type": "structure"
+            },
             "relationship": "finished",
-            "target": "year: 1989",
+            "target": {
+                "name": "1989-11-09",
+                "type": "date"
+            },
             "confidence": 1.00
-        }, {
-            "source": "Berlin Wall",
+        },
+        {
+            "source": {
+                "name": "Berlin Wall",
+                "type": "structure"
+            },
             "relationship": "finished",
-            "target": "date: 1989-11-09",
+            "target": {
+                "name": "1989",
+                "type": "year"
+            },
             "confidence": 1.00
         }
     ]

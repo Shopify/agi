@@ -1,5 +1,5 @@
 import typer
-from agi.db.neo4j_connection import Neo4jConnection
+from agi.db.semantic_network import SemanticNetwork
 from agi.config.settings import settings
 from agi.agent import Agent
 
@@ -18,8 +18,25 @@ def chat(
         settings.TRUST,
         help="between 0 and 1.0 where 0 is no trust and 1.0 is absolute trust",
     ),
+    gullibilty: float = typer.Option(
+        settings.GULLIBLITY,
+        help="between 0 and 1.0 where 0 is not gullible and 1.0 is very gullible",
+    ),
+    creativity: float = typer.Option(
+        settings.GULLIBLITY,
+        help="between 0 and 1.0 where 0 is not creative and 1.0 is very creative",
+    ),
+    susceptibility: float = typer.Option(
+        settings.GULLIBLITY,
+        help="between 0 and 1.0 where 0 is not susceptibile and 1.0 is very susceptibile",
+    ),
 ):
-    print(f"Creating agent with a trust level of {trust}")
+    print(f"Creating agent with the following personality")
+    print(f"Trust: {trust}")
+    print(f"Gullibilty: {gullibilty}")
+    print(f"Creativity: {creativity}")
+    print(f"Susceptibility: {susceptibility}")
+
     agent = Agent(trust=trust)
     print(f'Sending this message to the AGI Agent "{message}"')
     agent.interact(message)
@@ -27,7 +44,7 @@ def chat(
 
 @app.command(help="test neo4j")
 def neo4j():
-    neo4j = Neo4jConnection()
+    neo4j = SemanticNetwork()
     result = neo4j.query("MATCH (n) RETURN n")
     print(result)
     neo4j.close()
