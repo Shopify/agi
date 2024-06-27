@@ -5,7 +5,7 @@ from agi.config.settings import settings
 from openai import OpenAI
 
 
-def chat_completion(prompt):
+def chat_completion(prompt, temperature=0.7):
     client = OpenAI(base_url=settings.OPENAI_API_BASE, api_key=settings.OPENAI_API_KEY)
 
     chat_completion = client.chat.completions.create(
@@ -15,6 +15,7 @@ def chat_completion(prompt):
                 "content": prompt,
             }
         ],
+        temperature=temperature,
         response_format={"type": "json_object"},
         model="gpt-4o",
     )
@@ -46,11 +47,11 @@ def semantic_extractor(input):
     template = load_template("semantic_extractor")
     prompt = template.render(input=input, relationship_types=relationship_types)
 
-    return chat_completion(prompt)
+    return chat_completion(prompt=prompt, temperature=settings.CREATIVITY)
 
 
 def interaction_classifier(input):
     template = load_template("interaction_classifier")
     prompt = template.render(input=input)
 
-    return chat_completion(prompt)
+    return chat_completion(prompt=prompt, temperature=0)
