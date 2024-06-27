@@ -1,5 +1,6 @@
 import os
 
+
 class Settings:
     def __init__(self):
         self.OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
@@ -12,5 +13,5 @@ class Settings:
         self.CREATIVITY = float(os.getenv("CREATIVITY", 0.3))
         self.SUSCEPTIBILITY = float(os.getenv("SUSCEPTIBILITY", 0.3))
 
-settings = Settings()
 
+settings = Settings()
