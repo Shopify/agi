@@ -15,4 +15,3 @@ class Neo4jConnection:
     def drop_all(self):
         delete_query = "MATCH (n) DETACH DELETE n"
         self.query(delete_query)
-        print("All nodes and relationships have been removed from the database.")
