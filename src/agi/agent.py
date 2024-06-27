@@ -27,6 +27,14 @@ class Agent:
                 "that this is a factual message"
             )
 
+            for concept_dict in message_semantics['concepts']:
+                concept = Concept(concept_dict['type'], concept_dict['name'])
+                for relationship in message_semantics['relationships']:
+                    if concept_dict == relationship['source']:
+                        breakpoint()
+                        concept.relationships
+
+                        
             # look up identified concepts
             # for each concept check if it aligns with existing concept relationships
             # if trust is 1.0, update concept relationships to match new fact
@@ -44,3 +52,9 @@ class Agent:
             # Use the relationships of that concept as context for the question
             # respond to the question
         return message_classification, message_semantics
+
+    def determine_trust(self):
+        pass
+
+    def determine_confidence(self):
+        pass

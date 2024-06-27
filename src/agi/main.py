@@ -42,12 +42,11 @@ def chat(
     agent.interact(message)
 
 
-@app.command(help="test neo4j")
-def neo4j():
+@app.command(help="drop semantic network")
+def destroy():
     neo4j = Neo4jConnection()
-    result = neo4j.query("MATCH (n) RETURN n")
-    print(result)
-    neo4j.close()
+    neo4j.drop_all()
+    print("🤖🔫 AGI has been destroyed... says the computer...")
 
 
 if __name__ == "__main__":

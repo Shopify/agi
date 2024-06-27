@@ -55,3 +55,12 @@ def interaction_classifier(input):
     prompt = template.render(input=input)
 
     return chat_completion(prompt=prompt, temperature=0)
+
+def determine_consistency(existing_relationships, new_relationship):
+    template = load_template("determine_consistency")
+    prompt = template.render(
+        existing_relationships=existing_relationships,
+        new_relationship=new_relationship
+    )
+
+    return chat_completion(prompt=prompt, temperature=0)
