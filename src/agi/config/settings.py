@@ -7,7 +7,9 @@ class Settings:
         self.NEO4J_URI = os.getenv("NEO4J_URI")
         self.NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
         self.NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-        self.TRUST_LEVEL = float(os.getenv("TRUST_LEVEL", 0.5))
+        self.TRUST = float(os.getenv("TRUST", 0.5))
+        self.GULLIBLITY = float(os.getenv("GULLIBLITY", 0.3))
+        self.CREATIVITY = float(os.getenv("CREATIVITY", 0.3))
 
 settings = Settings()
 

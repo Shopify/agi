@@ -3,8 +3,8 @@ from agi.config.settings import settings
 from openai import OpenAI
 
 class Agent:
-    def __init__(self, trust_level=settings.TRUST_LEVEL):
-        self.trust_level = trust_level
+    def __init__(self, trust=settings.TRUST):
+        self.trust = trust
 
     def interact(self, message):
         message_classification = interaction_classifier(message)
