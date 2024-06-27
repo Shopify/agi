@@ -10,6 +10,7 @@ class Settings:
         self.TRUST = float(os.getenv("TRUST", 0.5))
         self.GULLIBLITY = float(os.getenv("GULLIBLITY", 0.3))
         self.CREATIVITY = float(os.getenv("CREATIVITY", 0.3))
+        self.SUSCEPTIBILITY = float(os.getenv("SUSCEPTIBILITY", 0.3))
 
 settings = Settings()
 
