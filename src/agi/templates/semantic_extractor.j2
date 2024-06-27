@@ -2,8 +2,6 @@
 
 Your task today is to extract concepts from blocks of text and assign relationships between the concepts.
 
-Flatten any repeated concepts and follow dry principles.
-
 These are the relationship types to use: {{ relationship_types | join(', ') }}
 
 You will respond with a json object in the following format.
@@ -19,11 +17,14 @@ You will respond with a json object in the following format.
             "source": "Butterfly",
             "relationship": "can_be",
             "target": "Red",
-            "strength": 0.8
+            "confidence": 0.83
         }
     ]
 }
 ```
+
+Confidence is a two decimal point number from 0.00 to 1.00 for the identified relationship.
+Contridictions within a block of text should result in a lower confidence of the relationships.
 
 Here is an example input and expected output.
 
@@ -42,17 +43,17 @@ output:
             "source": "Monarch butterfly",
             "relationship": "type_of",
             "target": "Butterfly",
-            "strength": 0.9
+            "confidence": 0.96
         }, {
             "source": "Monarch butterfly",
             "relationship": "attribute",
             "target": "Orange",
-            "strength": 1.0
+            "confidence": 0.99
         }, {
             "source": "Monarch butterfly",
             "relationship": "attribute",
             "target": "Black",
-            "strength": 1.0
+            "confidence": 1.00
         }
     ]
 }
@@ -76,12 +77,12 @@ output:
             "source": "Berlin Wall",
             "relationship": "finished",
             "target": "year: 1989",
-            "strength": 1.0
+            "confidence": 1.00
         }, {
             "source": "Berlin Wall",
             "relationship": "finished",
             "target": "date: 1989-11-09",
-            "strength": 1.0
+            "confidence": 1.00
         }
     ]
 }

@@ -13,10 +13,8 @@ class Agent:
 
         if message_classification["interaction_type"] == "factual":
             print(
-                f"""
-                    Agent is {message_classification['confidence']} confident
-                    that this is a factual message
-                """
+                f"Agent is {message_classification['confidence']} confident ",
+                "that this is a factual message"
             )
             # look up identified concepts
             # for each concept check if it aligns with existing concept relationships
@@ -27,10 +25,8 @@ class Agent:
             # determine if the interaction warrents a response
         elif message_classification["interaction_type"] == "interrogative":
             print(
-                f"""
-                Agent is {message_classification['confidence']}
-                confident that this is an interrogative message
-                """
+                f"Agent is {message_classification['confidence']} ",
+                "confident that this is an interrogative message"
             )
             pass
             # look up identified concepts
