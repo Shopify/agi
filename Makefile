@@ -8,3 +8,7 @@ install:
 	poetry install
 shell:
 	poetry shell
+style:
+	flake8 .
+style-fix:
+	black .
