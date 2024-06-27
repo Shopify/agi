@@ -1,6 +1,6 @@
 from agi.extractors import interaction_classifier, semantic_extractor
 from agi.config.settings import settings
-from agi.db.semantic_network import SemanticNetwork
+from agi.concept import Concept
 
 
 class Agent:
@@ -44,16 +44,3 @@ class Agent:
             # Use the relationships of that concept as context for the question
             # respond to the question
         return message_classification, message_semantics
-    
-    def add_concept(self, concept):
-        concept = Node("Person", name="John Doe")
-
-    def _lookup_concepts(self, concepts):
-        neo4j = SemanticNetwork()
-        existing_concepts = []
-        for concept in concepts:
-            query = neo4j.run(f"""
-                MATCH (c:{concept})
-                RETURN c
-            """)
-

@@ -1,5 +1,5 @@
 import typer
-from agi.db.semantic_network import SemanticNetwork
+from agi.db.neo4j import Neo4jConnection
 from agi.config.settings import settings
 from agi.agent import Agent
 
@@ -44,7 +44,7 @@ def chat(
 
 @app.command(help="test neo4j")
 def neo4j():
-    neo4j = SemanticNetwork()
+    neo4j = Neo4jConnection()
     result = neo4j.query("MATCH (n) RETURN n")
     print(result)
     neo4j.close()
