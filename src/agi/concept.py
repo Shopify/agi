@@ -9,6 +9,7 @@ class Concept:
         self.type = self._neo4j_safe(type)
         self.name = self._neo4j_safe(name)
         self.neo4j = Neo4jConnection()
+        self.node = self._get_node()
 
     def _neo4j_safe(self, string):
         return string.lower().replace(' ', '_')
@@ -40,6 +41,21 @@ class Concept:
                     }
                 )
         return relationships
+
+    def _get_node(self, **properties):
+        merge_query = f"""
+            MERGE (n:{self.type} {{name: $name}})
+            ON CREATE SET n += $properties
+            ON MATCH SET n += $properties
+            RETURN n
+        """
+        properties_with_name = {"name": self.name, "properties": properties}
+        result = self.neo4j.query(merge_query, parameters=properties_with_name)
+
+        if result:
+            return result[0]["n"]
+        else:
+            return None
 
     def _calculate_temporal_bais(self, start, end, event):
         start_epoch = start.timestamp()
