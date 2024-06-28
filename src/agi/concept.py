@@ -6,12 +6,9 @@ from agi.config.settings import settings
 
 class Concept:
     def __init__(self, type, name):
-        self.type = self._neo4j_safe(type)
-        self.name = self._neo4j_safe(name)
+        self.type = type.lower()
+        self.name = name.lower()
         self.neo4j = Neo4jConnection()
-
-    def _neo4j_safe(self, string):
-        return string.lower().replace(' ', '_')
     
     @property
     def relationships(self):
@@ -100,17 +97,13 @@ class Concept:
         return weighted_average
 
     def upsert_relationship(self, relationship_type, target, confidence, trust):
+        # this doesn't really work but yolo
         existing_relationships_query = f"""
-            MATCH (a:`{self.type}` {{name: $name_a}})-[r:`{relationship_type}`]->(b:`{target.type}` {{name: $name_b}})
+            MATCH (a:{self.type} {{name: '{self.name}'}})-[r:{relationship_type}]->(b:{target.type} {{name: '{target.name}'}})
             RETURN r
         """
-
-        parameters = {
-            'name_a': self.name,
-            'name_b': target.name
-        }
-
-        existing_relationships = self.neo4j.query(existing_relationships_query, parameters)
+        print(existing_relationships_query)
+        existing_relationships = self.neo4j.query(existing_relationships_query)
 
         weight_map = [
             {
@@ -124,42 +117,26 @@ class Concept:
             weight_map = weight_map + json.loads(existing_relationships[0]['r']._properties['weight_map'])
             weight = self._calculate_weight(weight_map)
             serialized_weight_map = json.dumps(weight_map)
-            update_rel_query = """
-                MATCH (a:{label_a} {name: $name_a}), (b:{label_b} {name: $name_b})
-                MERGE (a)-[r:{rel_type}]->(b)
-                ON CREATE SET r.weight = $weight, r.weight_map = $weight_map
-                ON MATCH SET r.weight = $weight, r.weight_map = $weight_map
+            update_rel_query = f"""
+                MATCH (a:{self.type} {{name: '{self.name}'}}), (b:{target.type} {{name: '{target.name}'}})
+                MERGE (a)-[r:{relationship_type}]->(b)
+                ON CREATE SET r.weight = {weight}, r.weight_map = '{serialized_weight_map}'
+                ON MATCH SET r.weight = {weight}, r.weight_map = '{serialized_weight_map}'
                 RETURN r
             """
-            parameters = {
-                'label_a': self.type,
-                'name_a': self.name,
-                'label_b': target.type,
-                'name_b': target.name,
-                'rel_type': relationship_type,
-                'weight': weight,
-                'weight_map': serialized_weight_map
-            }
             print(update_rel_query)
-            self.neo4j.query(update_rel_query, parameters)
+            self.neo4j.query(update_rel_query)
         else:
             weight = self._calculate_weight(weight_map)
             serialized_weight_map = json.dumps(weight_map)
-
+            
             create_rel_query = f"""
-                MATCH (a:{self.type} {{name: $name_a}}), (b:{target.type} {{name: $name_b}})
-                CREATE (a)-[r:{relationship_type} {{weight: $weight, weight_map: $weight_map}}]->(b)
+                MATCH (a:{self.type} {{name: '{self.name}'}}), (b:{target.type} {{name: '{target.name}'}})
+                CREATE (a)-[r:{relationship_type} {{weight: {weight}, weight_map: '{serialized_weight_map}'}}]->(b)
                 RETURN r
             """
-
-            parameters = {
-                'name_a': self.name,
-                'name_b': target.name,
-                'weight': weight,
-                'weight_map': serialized_weight_map
-            }
-
-            self.neo4j.query(create_rel_query, parameters)
+            print(create_rel_query)
+            self.neo4j.query(create_rel_query)
 
     def __str__(self):
         return f"Concept name: '{self.name}', type: '{self.type}'"
