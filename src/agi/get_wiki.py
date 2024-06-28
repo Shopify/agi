@@ -6,10 +6,10 @@ class GetWikiSummary:
 
     Example:
     ```python
-    from src.agi.get_wiki import GetWikiSummary
+    from agi.get_wiki import GetWikiSummary
     
     get_wiki_summary = GetWikiSummary()
-    get_summary = get_wiki_summary.get_summary('shopify')
+    get_summary = get_wiki_summary.get_summary_by_title('shopify')
     print(get_summary)
 
     get_summaries = get_wiki_summary.get_summary_by_titles(['shopify', 'canada', 'History_of_Apple_Inc.'])
