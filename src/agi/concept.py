@@ -12,7 +12,7 @@ class Concept:
         self.node = self._get_node()
 
     def _neo4j_safe(self, string):
-        return string.lower().replace(' ', '_')
+        return string.lower().replace(' ', '_').replace('-', '_')
     
     @property
     def relationships(self):
@@ -61,6 +61,7 @@ class Concept:
         return weight_map[-1]['confidence'] * weight_map[-1]['trust']
 
     def upsert_relationship(self, relationship_type, target, confidence, trust):
+        relationship_type = self._neo4j_safe(relationship_type)
         existing_relationships_query = f"""
             MATCH (a:`{self.type}` {{name: $name_a}})-[r:`{relationship_type}`]->(b:`{target.type}` {{name: $name_b}})
             RETURN r
@@ -102,7 +103,6 @@ class Concept:
                 'weight_map': serialized_weight_map
             }
 
-            print(update_rel_query)
             self.neo4j.query(update_rel_query, parameters)
         else:
             weight = self._calculate_weight(weight_map)

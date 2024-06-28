@@ -12,6 +12,7 @@ The type is a broad category for the concept. Here are some example categories;
  - species
  - place
  - action
+ - era
 
 The name is the base word of the concept. For instance;
  - butterflies should be butterfly
@@ -123,6 +124,11 @@ output:
 Special cases.
  - Dates
    - When a date is included, create a concept for the year and the date
+ - Places
+   - Countries, states, provinces, cities, towns, jurisdictions, etc should be type "place"
+ - Countries
+   - Country names should be their short common name. For instance, "Iran" instead of "Islamic Republic of Iran" and "United States" instead of "United States of America"
+   - Countries should be of type "place" and not "country"
 
 
 input: "The Berlin Wall fell on the 9th of November, 1989."

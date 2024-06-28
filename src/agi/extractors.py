@@ -56,6 +56,7 @@ def interaction_classifier(input):
 
     return chat_completion(prompt=prompt, temperature=0)
 
+
 def determine_consistency(existing_relationships, new_relationship):
     template = load_template("determine_consistency")
     prompt = template.render(
@@ -64,3 +65,23 @@ def determine_consistency(existing_relationships, new_relationship):
     )
 
     return chat_completion(prompt=prompt, temperature=0)
+
+
+def answer_question_with_context(question, concept_map):
+    template = load_template("answer_question_with_context")
+    prompt = template.render(
+        question=question,
+        concept_map=concept_map
+    )
+
+    return chat_completion(prompt=prompt, temperature=0)
+
+
+def identify_missing_context(question, concept_map):
+    template = load_template("identify_missing_context")
+    prompt = template.render(
+        question=question,
+        concept_map=concept_map
+    )
+
+    return chat_completion(prompt=prompt, temperature=0.5)

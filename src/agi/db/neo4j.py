@@ -1,6 +1,8 @@
 from agi.config.settings import settings
 from neo4j import GraphDatabase
+import logging
 
+logging.basicConfig(level=logging.ERROR) 
 class Neo4jConnection:
     def __init__(self):
         self.driver = GraphDatabase.driver(
