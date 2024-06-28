@@ -17,7 +17,7 @@ def chat(
         help="between 0 and 1.0 where 0 is no trust and 1.0 is absolute trust",
     )
 ):
-    print(f"🤔")
+    print(f"🤖 thinking...")
     agent = Agent(trust=trust)
     response = agent.interact(message)
     print(response)
@@ -49,8 +49,9 @@ def wiki(
         paragraphs = re.split(r'\n+', text.strip())
         agent = Agent(trust=1.0)
         for paragraph in paragraphs:
-            print(f"I'm reading this paragraph:\n```\n{paragraph}\n```")
-            agent.interact(paragraph)
+            if len(paragraph) > 20:
+                print(f"I'm reading this paragraph:\n```\n{paragraph}\n```")
+                agent.interact(paragraph)
 
 
 if __name__ == "__main__":

@@ -58,6 +58,7 @@ class Concept:
             return None
 
     def _calculate_weight(self, weight_map):
+        # this needs to be updated. It should use all the data from the weight map to generate a current weight
         return weight_map[-1]['confidence'] * weight_map[-1]['trust']
 
     def upsert_relationship(self, relationship_type, target, confidence, trust):
@@ -87,7 +88,6 @@ class Concept:
             weight = self._calculate_weight(weight_map)
             serialized_weight_map = json.dumps(weight_map)
 
-            # Format labels and relationship type directly in the query string using f-strings
             update_rel_query = f"""
                 MATCH (a:`{self.type}` {{name: $name_a}}), (b:`{target.type}` {{name: $name_b}})
                 MERGE (a)-[r:`{relationship_type}`]->(b)
