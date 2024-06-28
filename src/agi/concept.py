@@ -9,7 +9,6 @@ class Concept:
         self.type = type.lower()
         self.name = name.lower()
         self.neo4j = Neo4jConnection()
-        self.node = self._get_node()
     
     @property
     def relationships(self):
@@ -103,6 +102,7 @@ class Concept:
             MATCH (a:{self.type} {{name: '{self.name}'}})-[r:{relationship_type}]->(b:{target.type} {{name: '{target.name}'}})
             RETURN r
         """
+        print(existing_relationships_query)
         existing_relationships = self.neo4j.query(existing_relationships_query)
 
         weight_map = [
@@ -124,6 +124,7 @@ class Concept:
                 ON MATCH SET r.weight = {weight}, r.weight_map = '{serialized_weight_map}'
                 RETURN r
             """
+            print(update_rel_query)
             self.neo4j.query(update_rel_query)
         else:
             weight = self._calculate_weight(weight_map)
@@ -134,22 +135,8 @@ class Concept:
                 CREATE (a)-[r:{relationship_type} {{weight: {weight}, weight_map: '{serialized_weight_map}'}}]->(b)
                 RETURN r
             """
+            print(create_rel_query)
             self.neo4j.query(create_rel_query)
-
-    def _get_node(self, **properties):
-        merge_query = f"""
-            MERGE (n:{self.type} {{name: $name}})
-            ON CREATE SET n += $properties
-            ON MATCH SET n += $properties
-            RETURN n
-        """
-        properties_with_name = {"name": self.name, "properties": properties}
-        result = self.neo4j.query(merge_query, parameters=properties_with_name)
-
-        if result:
-            return result[0]["n"]
-        else:
-            return None
 
     def __str__(self):
         return f"Concept name: '{self.name}', type: '{self.type}'"

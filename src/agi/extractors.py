@@ -17,7 +17,7 @@ def chat_completion(prompt, temperature=0.7):
         ],
         temperature=temperature,
         response_format={"type": "json_object"},
-        model="gpt-4o",
+        model="gpt-4o"
     )
 
     return json.loads(chat_completion.choices[0].message.content)

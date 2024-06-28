@@ -2,6 +2,8 @@ import typer
 from agi.db.neo4j import Neo4jConnection
 from agi.config.settings import settings
 from agi.agent import Agent
+from agi.get_wiki import GetWikiSummary
+import re
 
 app = typer.Typer()
 
@@ -47,6 +49,19 @@ def destroy():
     neo4j = Neo4jConnection()
     neo4j.drop_all()
     print("🤖🔫 AGI has been destroyed... says the computer...")
+
+
+@app.command(help="ingest the summary of a wikipedia article")
+def wiki(article: str = typer.Argument(..., help="The wikipedia article to ingest"),):
+    get_wiki_summary = GetWikiSummary()
+    summary = get_wiki_summary.get_summary_by_title(article)
+    print(summary)
+
+    paragraphs = re.split(r'\n+', summary.strip())
+    agent = Agent(trust=1.0)
+    for paragraph in paragraphs:
+        print(f"processing this paragraph:\n```\n{paragraph}\n```")
+        agent.interact(paragraph)
 
 
 if __name__ == "__main__":
