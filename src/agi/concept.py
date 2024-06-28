@@ -39,30 +39,66 @@ class Concept:
                 )
         return relationships
 
-    def _calculate_weight(self, weight_map):
-        # fix this, my brain isn't working
-        weight_map = [{**entry, 'timestamp': datetime.fromisoformat(entry['timestamp'])} for entry in weight_map]
-        most_recent_date = max(entry['timestamp'] for entry in weight_map)
-        
+    def _calculate_temporal_bais(self, start, end, event):
+        start_epoch = start.timestamp()
+        end_epoch = end.timestamp()
+        event_epoch = event.timestamp()
+
+        if end_epoch != start_epoch:
+            relative_position = (event_epoch - start_epoch) / (end_epoch - start_epoch)
+        else:
+            return 0.95
+
+        scale_min = 0.1
+        scale_max = 0.95
+        relative_position = max(0, min(1, relative_position))
+
+        if relative_position > 0:
+            log_scale = scale_min + (scale_max - scale_min) * math.log10(1 + 9 * relative_position)
+        else:
+            log_scale = scale_min
+
+        return log_scale
+
+    def _calculate_weighted_average_accuracy(self, weighted_averages):
         weighted_sum = 0
         total_weight = 0
-        decay_factor = 0.1
-
-        for entry in weight_map:
-            days_diff = (most_recent_date - entry['timestamp']).total_days()
-            time_weight = math.exp(-decay_factor * days_diff)
-            effective_trust = (1 - settings.GULLIBLITY) * (entry['trust'] ** 3) * time_weight
+        
+        for weighted_average in weighted_averages:
+            accuracy = weighted_average['accuracy']
+            weight = weighted_average['weight']
             
-            combined_weight = entry['confidence'] * (1 - effective_trust) + effective_trust * entry['confidence']
-            weighted_value = combined_weight * time_weight
-            weighted_sum += weighted_value
-            total_weight += time_weight
-
+            weighted_sum += accuracy * weight
+            total_weight += weight
+        
         if total_weight == 0:
             return 0
-        return round(weighted_sum / total_weight, 3)
+        return weighted_sum / total_weight
+
+    def _calculate_weight(self, weight_map):
+        weight_map = [{**entry, 'timestamp': datetime.fromisoformat(entry['timestamp'])} for entry in weight_map]
+        earliest_weight = min(entry['timestamp'] for entry in weight_map)
+        latest_weight = max(entry['timestamp'] for entry in weight_map)
+              
+        weighted_averages = []
+
+        for entry in weight_map:
+            temporal_bias_index = self._calculate_temporal_bais(earliest_weight, latest_weight, entry['timestamp'])
+            trust_index = entry['trust'] ** 10
+            gullibility_index = 1 - (settings.GULLIBLITY ** 1.5)
+            accuracy = temporal_bias_index * trust_index * gullibility_index
+            weighted_averages.append(
+                {
+                    "accuracy": accuracy,
+                    "weight": entry['confidence']
+                }
+            )
+            
+        weighted_average = self._calculate_weighted_average_accuracy(weighted_averages)
+        return weighted_average
 
     def upsert_relationship(self, relationship_type, target, confidence, trust):
+        # this doesn't really work but yolo
         existing_relationships_query = f"""
             MATCH (a:{self.type} {{name: '{self.name}'}})-[r:{relationship_type}]->(b:{target.type} {{name: '{target.name}'}})
             RETURN r
